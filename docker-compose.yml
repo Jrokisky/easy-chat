@@ -1,0 +1,22 @@
+# Docker Compose Reference: https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:14.1
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432 # TODO: just for testing. Make db only accessible to other docker services in the future.
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PW:-password}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_DB: ${POSTGRES_DB:-db}
+
+
+
+
+volumes:
+  postgres_data:
